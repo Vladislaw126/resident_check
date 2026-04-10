@@ -1,0 +1,39 @@
+\section{Scope and Non-Goals}
+
+\subsection{Scope}
+
+At this stage, the project is scoped as a research-driven proof of concept. Its purpose is to explore, compare, and critique possible verification architectures rather than to produce a deployable system.
+
+The current scope includes:
+
+\begin{itemize}
+    \item framing the policy and technical problem around resident-only eligibility verification;
+    \item clarifying the distinction between identity, age, lawful stay, and current residency;
+    \item comparing at least two design directions: a baseline central lookup and a privacy-preserving attribute-verification approach;
+    \item identifying threat-model foundations, trust boundaries, and likely abuse cases;
+    \item planning a local lab environment using available laptops, virtual machines, and small devices for experimentation;
+    \item building a proof of concept that can be used to test security properties and privacy tradeoffs;
+    \item documenting societal concerns such as logging, profiling, and surveillance creep.
+\end{itemize}
+
+The scope is intentionally broad enough to support both implementation and critique. The project is not only about building a system, but also about understanding where such a system becomes problematic.
+
+\subsection{Non-Goals}
+
+The following are outside the current scope:
+
+\begin{itemize}
+    \item deploying a production-ready verification platform;
+    \item connecting to real Dutch government registries or processing real personal data;
+    \item making legal claims that a given architecture is currently lawful to deploy;
+    \item defining or endorsing public policy on cannabis regulation;
+    \item proving that resident-only access rules are socially desirable;
+    \item building a complete national digital identity framework;
+    \item solving all operational, legal, and institutional questions that a real rollout would require.
+\end{itemize}
+
+These non-goals are important because they keep the project tractable and honest. The proof of concept is meant to be an instrument for analysis, experimentation, and critique. It should help reveal tradeoffs and risks, not create the illusion that a sensitive identity-verification system can be reduced to a simple engineering exercise.
+
+\subsection{Boundary of the Proof of Concept}
+
+The PoC will likely simulate trusted services, verifier devices, and identity-related checks in a controlled lab environment. It will focus on the logic of verification, the movement of sensitive data, and the security properties of different architectures. Real institutional authority, legal access rights, and production governance structures will be treated as contextual constraints rather than implemented realities.

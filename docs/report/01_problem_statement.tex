@@ -1,0 +1,17 @@
+\section{Problem Statement}
+
+This project studies how a hypothetical resident-only eligibility rule for Dutch coffeeshops could be checked electronically while minimizing disclosure of personal data. The practical motivation is that a seller can usually inspect a document to estimate or verify a buyer's age, but the relevant policy category under a resident-only rule would not be identity alone. It would instead be something closer to current residency in the Netherlands.
+
+That creates a verification problem. The documents people commonly carry do not provide a uniform and reliable proof of current Dutch residency across all categories of eligible buyers. Dutch nationals, EU citizens residing in the Netherlands, and non-EU residents may all present different document situations. Some non-EU nationals may have Dutch residence documents that strongly indicate lawful residence. Many EU citizens living in the Netherlands, however, do not carry a Dutch residence permit at all. As a result, a manual check at the point of sale becomes inconsistent and potentially unreliable.
+
+A simple identifier-based solution is also inadequate. In particular, BSN alone is not equivalent to current residency in the Netherlands. A valid or seemingly valid BSN does not automatically answer the actual eligibility question. Therefore, the central problem is not merely how to validate a number, but how to verify the right attribute.
+
+The project is further complicated by the sensitivity of the purchase context. Because the product category is socially and politically sensitive, any electronic verification infrastructure could introduce risks beyond ordinary access control. Such a system may create opportunities for central logging, profiling, expanded analytics, or future surveillance. For that reason, the problem must be framed not only as a systems-engineering challenge, but also as a privacy and governance challenge.
+
+The problem addressed by this proof of concept can therefore be stated as follows:
+
+\begin{quote}
+How can a system verify only the minimum necessary eligibility attributes for a hypothetical resident-only coffeeshop rule, such as age and current residency in the Netherlands, while minimizing disclosure to the verifier and reducing the risks of logging, profiling, and misuse?
+\end{quote}
+
+This formulation deliberately shifts the focus away from direct identity exposure and toward attribute verification. That framing will guide the later comparison between a baseline central-lookup architecture and a more privacy-preserving selective-disclosure design.

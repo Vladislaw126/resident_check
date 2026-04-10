@@ -1,0 +1,98 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\title{Research Draft:\\Resident Verification for Coffeeshop Eligibility}
+\author{Work in Progress}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Background and Context}
+
+This draft collects the early-stage research ideas behind a proof of concept that studies how a hypothetical resident-only eligibility rule for Dutch coffeeshops could be verified electronically. The practical problem is that age can often be checked from an identification document, but current residency in the Netherlands is much harder to verify at the point of sale without relying on highly sensitive government-held data.
+
+The project begins from a mismatch between a possible policy category and the proofs that ordinary people carry in daily life. A coffeeshop seller can inspect a passport, identity card, or residence document, but the policy condition that would matter under a resident-only rule is not identity alone. It is something closer to current residency in the Netherlands, and that attribute is not uniformly visible on all documents that eligible buyers may carry.
+
+\section{Problem Motivation}
+
+Name and age can be derived from most identification documents. Residency, however, is more difficult. In the Dutch context, residency cannot be reliably inferred from the national identity card alone. Institutions such as hospitals, municipalities, or some regulated organisations may have lawful access to sensitive personal data that is relevant to residence, but coffeeshops do not have the same access or permission. This creates a gap between what a seller would need to know and what a buyer can reasonably and lawfully be asked to reveal.
+
+Countries assign different identifiers to residents or taxpayers. In Romania, for example, the CNP acts as a core personal identifier, while foreigners may receive a NIF used for taxation. In the Netherlands, the BSN is used broadly in interactions with authorities and institutions, but BSN alone is not proof of current residency in the Netherlands. A person may have a BSN without currently residing in the Netherlands, and foreign nationals living in the Netherlands may also have BSNs. Therefore, the existence or syntactic validity of a BSN does not answer the policy question by itself.
+
+Another complication is that not all foreign nationals residing in the Netherlands carry the same kind of residence proof. Some non-EU nationals have Dutch residence cards that strongly suggest lawful residence in the Netherlands. EU citizens, however, generally do not need a Dutch residence permit, even when they live in the Netherlands. As a result, a document-based manual check does not cover all eligible residents in a simple and uniform way.
+
+\section{Core Research Tension}
+
+The project is motivated by a tension between enforceability and privacy.
+
+On one side, an electronic verification system may appear attractive because it could reduce ambiguity at the point of sale. It could also, in principle, show only the information needed for the decision, for example whether the person is over 18 and currently resident in the Netherlands.
+
+On the other side, any technical infrastructure that verifies eligibility for a sensitive purchase can become a channel for logging, profiling, and future surveillance. Even if the original purpose is narrow, later actors may want to know more: how often checks occur, what categories of people are buying, whether transactions can be linked, whether usage patterns can be profiled, or whether public-health analytics should be derived from the system. Some aggregate statistics may benefit policy or healthcare discussions, but systems that normalize person-linked checking can also expose individuals.
+
+\section{Working Thesis}
+
+The working thesis of the project is that the hardest part of the problem is not merely secure software implementation. The deeper issue is how to verify the right attribute with minimal disclosure. A strong proof of concept should therefore compare at least two approaches:
+
+\begin{enumerate}[label=\arabic*.]
+    \item a baseline central lookup design, in which the verifier sends an identifier or claim to a backend and receives an allow/deny result; and
+    \item a privacy-preserving attribute-verification design, in which the verifier learns only the minimum attributes needed for the decision.
+\end{enumerate}
+
+This comparison can help make the privacy, security, and operational tradeoffs visible.
+
+\section{Draft Research Questions}
+
+\begin{itemize}
+    \item What exactly should be verified: identity, lawful stay, administrative registration, or current residency?
+    \item Why is BSN alone insufficient as proof of residency in the Netherlands?
+    \item Can a system prove only that a person is \texttt{18+} and \texttt{resident\_in\_NL} without disclosing full identity?
+    \item How can a verifier avoid storing unnecessary buyer data at the point of sale?
+    \item What protections are needed against replay attacks, man-in-the-middle attacks, rogue verifier devices, and backend misuse?
+    \item How would a baseline central lookup differ from a selective-disclosure design in privacy and security?
+    \item Where could profiling, logging, and surveillance creep emerge in such a system?
+\end{itemize}
+
+\section{Possible Problems to Explore}
+
+The following problems are likely to shape the later proof of concept:
+
+\begin{itemize}
+    \item confusion between identity and eligibility;
+    \item overreliance on BSN as a shortcut;
+    \item lack of a uniform physical proof for all eligible residents;
+    \item strong asymmetry between what public institutions can access and what private businesses should access;
+    \item risk of central logging of sensitive verification events;
+    \item insider misuse of identity-related infrastructure;
+    \item technical attacks against verifier devices, networks, and backends.
+\end{itemize}
+
+\section{Early Technical Direction}
+
+At a high level, the proof of concept can be structured around a verifier terminal, one or more backend or issuer services, a mock registry or credential source, and a lab environment for attack and misuse testing. The emphasis should be on learning and experimentation rather than production deployment.
+
+The PoC should help answer not only whether an electronic check can be implemented, but also whether it can be implemented in a way that is resistant to unnecessary disclosure, centralisation of trust, and quiet expansion of logging capabilities.
+
+\section{Notes for the Future Report}
+
+This draft is intentionally broad and exploratory. Later report sections should refine and separate the following themes:
+
+\begin{itemize}
+    \item policy and administrative context;
+    \item problem statement;
+    \item scope and non-goals;
+    \item architecture options;
+    \item threat model;
+    \item implementation plan;
+    \item evaluation and security analysis;
+    \item privacy and societal concerns.
+\end{itemize}
+
+\end{document}
