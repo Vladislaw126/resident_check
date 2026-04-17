@@ -1,0 +1,32 @@
+workspace "Resident Check PoC - Approach A" "Container diagram for the naive central lookup approach" {
+
+    model {
+        clerk = person "Coffeeshop Clerk" "Uses the verifier terminal to check whether a buyer is eligible."
+
+        residentCheckSystem = softwareSystem "Resident Check System" "Supports eligibility verification for a hypothetical resident-only coffeeshop rule." {
+            verifierTerminal = container "Verifier Terminal App" "Used by the coffeeshop clerk to submit an identity query and display the result." "Web app / Local desktop app"
+            centralLookupApi = container "Central Lookup API" "Receives identity queries and forwards them to the appropriate authority lookup service." "Backend API"
+        }
+
+        municipalityLookupSystem = softwareSystem "Municipality Lookup System" "Provides access to municipality-level resident records." {
+            municipalityLookupService = container "Municipality Lookup Service" "Looks up resident records using the submitted identity information." "Backend service"
+            residentRegistryDb = container "Resident Registry Database" "Stores resident registry records." "Database"
+        }
+
+        clerk -> verifierTerminal "Uses"
+        verifierTerminal -> centralLookupApi "Submits identity query to"
+        centralLookupApi -> municipalityLookupService "Forwards lookup request to"
+        municipalityLookupService -> residentRegistryDb "Retrieves resident record from"
+        municipalityLookupService -> centralLookupApi "Returns identity/residency data to"
+        centralLookupApi -> verifierTerminal "Returns identity and residency data to"
+    }
+
+    views {
+        container residentCheckSystem "ApproachAContainers" "Approach A - naive central lookup" {
+            include *
+            autolayout lr
+        }
+
+        theme default
+    }
+}

@@ -1,0 +1,32 @@
+workspace "Resident Check PoC - Approach B" "Container diagram for the central boolean gateway approach" {
+
+    model {
+        clerk = person "Coffeeshop Clerk" "Uses the verifier terminal to check whether a buyer is eligible."
+
+        residentCheckSystem = softwareSystem "Resident Check System" "Supports eligibility verification for a hypothetical resident-only coffeeshop rule." {
+            verifierTerminal = container "Verifier Terminal App" "Used by the coffeeshop clerk to request an eligibility decision and display the result." "Web app / Local desktop app"
+            eligibilityGateway = container "Eligibility Gateway" "Evaluates eligibility by querying authoritative records and returns only a minimal decision." "Backend service"
+        }
+
+        authoritativeRegistrySystem = softwareSystem "Authoritative Registry System" "Provides access to resident records used for eligibility checking." {
+            authoritativeRegistryService = container "Authoritative Registry Service" "Retrieves authoritative resident records in response to eligibility checks." "Backend service"
+            residentRecordsDb = container "Resident Records Database" "Stores resident records used for eligibility determination." "Database"
+        }
+
+        clerk -> verifierTerminal "Uses"
+        verifierTerminal -> eligibilityGateway "Requests eligibility decision from"
+        eligibilityGateway -> authoritativeRegistryService "Checks authoritative records with"
+        authoritativeRegistryService -> residentRecordsDb "Retrieves resident record from"
+        authoritativeRegistryService -> eligibilityGateway "Returns record data to"
+        eligibilityGateway -> verifierTerminal "Returns allow/deny decision to"
+    }
+
+    views {
+        container residentCheckSystem "ApproachBContainers" "Approach B - central boolean gateway" {
+            include *
+            autolayout lr
+        }
+
+        theme default
+    }
+}
