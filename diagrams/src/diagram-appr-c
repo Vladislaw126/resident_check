@@ -1,0 +1,34 @@
+workspace "Resident Check PoC - Approach C" "Container diagram for the wallet-based eligibility verification approach" {
+
+    model {
+        buyer = person "Buyer" "Presents an eligibility proof using a wallet application."
+        clerk = person "Coffeeshop Clerk" "Uses the shop terminal to verify whether a buyer is eligible."
+
+        residentCheckSystem = softwareSystem "Resident Check System" "Verifies eligibility for a hypothetical resident-only coffeeshop rule using privacy-preserving credentials." {
+            shopTerminal = container "Shop Terminal App" "Used by the coffeeshop clerk to initiate and display eligibility verification." "Web app / Local desktop app"
+            verificationService = container "Verification Service" "Validates the presented proof of eligibility and checks credential status when needed." "Backend service"
+        }
+
+        walletApp = softwareSystem "Wallet App" "Stores signed eligibility credentials and presents proof to the verifier."
+        walletIssuer = softwareSystem "Wallet Issuer" "Issues signed eligibility credentials to the wallet app."
+        revocationService = softwareSystem "Revocation Service" "Provides credential status information, such as revocation or validity state."
+
+        buyer -> walletApp "Uses"
+        clerk -> shopTerminal "Uses"
+
+        walletIssuer -> walletApp "Issues signed eligibility credentials to"
+        walletApp -> shopTerminal "Presents proof of eligibility to"
+        shopTerminal -> verificationService "Submits presented proof for validation"
+        verificationService -> revocationService "Checks credential status with"
+        verificationService -> shopTerminal "Returns eligibility result to"
+    }
+
+    views {
+        container residentCheckSystem "ApproachCContainers" "Approach C - wallet-based eligibility verification" {
+            include *
+            autolayout lr
+        }
+
+        theme default
+    }
+}

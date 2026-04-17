@@ -1,0 +1,220 @@
+# This project involves local labs, VM images, packet captures,
+# generated certs, and mock identity data.
+# Do not commit secrets, private keys, captures, or private datasets.
+
+# =========================================================
+# OS / editor junk
+# =========================================================
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+.vscode/
+.idea/
+
+# =========================================================
+# Logs and runtime noise
+# =========================================================
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# =========================================================
+# Environment / secrets
+# =========================================================
+.env
+.env.*
+*.local
+
+# Private keys / certs / trust stores
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Secret folders
+secrets/
+.private/
+credentials/
+
+# =========================================================
+# Python
+# =========================================================
+__pycache__/
+*.py[cod]
+*.pyo
+.python-version
+
+.venv/
+venv/
+env/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# =========================================================
+# Node / frontend
+# =========================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dist/
+.next/
+.nuxt/
+coverage/
+
+# =========================================================
+# Rust
+# =========================================================
+target/
+Cargo.lock
+
+# Keep Cargo.lock only if this is a pure application repo and
+# you explicitly want reproducible app builds. Otherwise ignore it.
+
+# =========================================================
+# Java / JVM
+# =========================================================
+.gradle/
+build/
+out/
+*.class
+
+# =========================================================
+# C / C++ / native builds
+# =========================================================
+*.o
+*.obj
+*.so
+*.a
+*.dll
+*.dylib
+*.exe
+
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+Makefile
+
+# Uncomment Makefile only if it is generated, not handwritten.
+# In your repo you may actually want to track a handwritten Makefile.
+
+# =========================================================
+# Go
+# =========================================================
+bin/
+pkg/
+
+# =========================================================
+# Terraform / infra state
+# =========================================================
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# =========================================================
+# Docker / containers
+# =========================================================
+docker-data/
+*.tar
+
+# =========================================================
+# Virtual machines / disk images
+# =========================================================
+.vagrant/
+*.box
+*.qcow2
+*.vdi
+*.vmdk
+*.ova
+*.ovf
+
+# VM snapshots / local images
+snapshots/
+vm-images/
+
+# =========================================================
+# Packet captures / security testing artifacts
+# =========================================================
+*.pcap
+*.pcapng
+captures/
+pcaps/
+
+# =========================================================
+# Generated datasets / local mock data
+# =========================================================
+data/private/
+data/generated/
+data/mock-identities/private/
+data/mock-identities/generated/
+
+# =========================================================
+# Telemetry / observability outputs
+# =========================================================
+telemetry/traces/exported/
+telemetry/dashboards/generated/
+telemetry/raw/
+
+# =========================================================
+# Project-specific generated certs and dev infra
+# =========================================================
+infra/dev/certs/generated/
+infra/dev/certs/private/
+services/key-management/issued-certs/
+services/key-management/dev-ca/private/
+services/key-management/dev-ca/index.txt
+services/key-management/dev-ca/serial*
+services/key-management/dev-ca/newcerts/
+
+# =========================================================
+# Local lab configs that may contain sensitive values
+# =========================================================
+infra/network/*.local.*
+infra/network/router-backups/
+infra/network/switch-backups/
+
+# =========================================================
+# LaTeX build artifacts
+# =========================================================
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.xdv
+
+# PDFs:
+# keep final report PDFs if you want to version them;
+# otherwise uncomment the next line
+# *.pdf
