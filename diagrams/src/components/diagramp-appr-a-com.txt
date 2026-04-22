@@ -1,0 +1,43 @@
+workspace "Resident Check PoC - Approach A Components" "Component diagram for the Central Lookup API in Approach A" {
+
+    model {
+        clerk = person "Coffeeshop Clerk" "Uses the verifier terminal to check whether a buyer is eligible."
+
+        residentCheckSystem = softwareSystem "Resident Check System" "Supports eligibility verification for a hypothetical resident-only coffeeshop rule." {
+            verifierTerminal = container "Verifier Terminal App" "Used by the coffeeshop clerk to submit an identity query and display the result." "Web app / Local desktop app"
+
+            centralLookupApi = container "Central Lookup API" "Receives identity queries and forwards them to the appropriate authority lookup service." "Backend API" {
+                identityQueryController = component "Identity Query Controller" "Accepts identity queries from the verifier terminal and coordinates lookup processing."
+                requestValidator = component "Request Validator" "Validates the structure and required fields of incoming identity queries."
+                authorityRouter = component "Authority Router" "Determines which authority or municipality lookup path should handle the request."
+                residentRecordClient = component "Resident Record Client" "Calls the external municipality lookup service and retrieves resident record data."
+                responseMapper = component "Response Mapper" "Builds the response returned to the verifier, including identity and residency data."
+                auditLogger = component "Audit Logger" "Records lookup events, request metadata, and outcomes for auditing and monitoring."
+            }
+        }
+
+        municipalityLookupSystem = softwareSystem "Municipality Lookup System" "Provides access to municipality-level resident records." {
+            municipalityLookupService = container "Municipality Lookup Service" "Looks up resident records using the submitted identity information." "Backend service"
+        }
+
+        clerk -> verifierTerminal "Uses"
+        verifierTerminal -> identityQueryController "Submits identity query to"
+
+        identityQueryController -> requestValidator "Validates request with"
+        identityQueryController -> authorityRouter "Determines lookup route with"
+        authorityRouter -> residentRecordClient "Delegates resident record lookup to"
+        residentRecordClient -> municipalityLookupService "Requests resident record from"
+        residentRecordClient -> responseMapper "Passes retrieved record to"
+        responseMapper -> auditLogger "Logs lookup result with"
+        responseMapper -> verifierTerminal "Returns identity and residency data to"
+    }
+
+    views {
+        component centralLookupApi "ApproachAComponents" "Approach A - components of the Central Lookup API" {
+            include *
+            autolayout lr
+        }
+
+        theme default
+    }
+}
