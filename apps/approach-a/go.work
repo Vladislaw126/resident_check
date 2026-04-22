@@ -1,0 +1,7 @@
+go 1.26.2
+
+use (
+	./central_lookup_api
+	./municipality_lookup_mock
+	./verifier_terminal
+)
